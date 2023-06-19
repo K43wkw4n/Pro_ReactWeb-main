@@ -1,0 +1,20 @@
+.dropzone {
+    height: 40vh;
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px dashed lightgrey;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    -webkit-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+  }
+  .upload .active {
+    background-color: whitesmoke;
+    -webkit-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+  }

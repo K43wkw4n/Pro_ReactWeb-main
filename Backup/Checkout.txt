@@ -1,0 +1,180 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Formik, Form, ErrorMessage } from "formik";
+import { ValidateFormContact } from "./validate_form/ValidateContact";
+
+export default function Checkout() {
+  return (
+    <>
+      <section id="contact" className="contact">
+        <div className="container" data-aos="fade-up">
+          <div className="row">
+            <div className="col-8" style={{ backgroundColor: "grey" }}>
+              <Formik
+                enableReinitialize={true}
+                initialValues={{
+                  name: "",
+                  password: "",
+                  email: "",
+                  subject: "",
+                  message: "",
+                  phoneNumber: "",
+                  status: "",
+                }}
+                validationSchema={ValidateFormContact}
+                onSubmit={(values) => {
+                  let data = { ...values };
+                  console.log("data : " + JSON.stringify(data));
+                }}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  isSubmitting,
+                  setFieldValue,
+                  /* and other goodies */
+                }) => (
+                  <Form onSubmit={handleSubmit} >                  
+                    <div className="row">
+                      <div className="col-6">
+                     
+                    <label htmlFor="name">
+                            Email
+                          </label>
+                          <input
+                            type="text"
+                            name="email"
+                            onChange={(e) => {
+                              setFieldValue(
+                                "email",
+                                e.target.value.replace(
+                                  /[^A-Za-z_.#?!@$%^&*0-9]/gi,
+                                  ""
+                                )
+                              );
+                            }}
+                            onBlur={handleBlur}
+                            value={values.email}
+                            className={
+                              "form-control" +
+                              (errors.email && touched.email
+                                ? " is-invalid"
+                                : "")
+                            }
+                            placeholder="example@email.com"
+                           
+                          />
+                          <ErrorMessage
+                            name="email"
+                            component="div"
+                            className="invalid-feedback"
+                          />
+                         </div>
+
+                          <div className="col-6">      
+                          <label htmlFor="name">
+                            Password
+                          </label>
+                          <input
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password}
+                            className={
+                              "form-control" +
+                              (errors.password && touched.password
+                                ? " is-invalid"
+                                : "")
+                            }
+                            placeholder="Password"
+                           
+                          />
+                          <ErrorMessage
+                            name="password"
+                            component="div"
+                            className="invalid-feedback"
+                          />  
+                          </div>         
+
+                        
+                    </div>                    
+                  </Form>
+                )}
+
+                
+
+              </Formik>
+            </div>
+
+            <div
+              className="col-4"
+              style={{
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  border: "1px solid black",
+                  backgroundColor: "#F1F1F1",
+                }}
+              >
+                <div
+                  style={{
+                    alignItems: "center",
+                    marginTop: 20,
+                    flexDirection: "row",
+                  }}
+                  className="container"
+                >
+                  <div style={{ fontWeight: "bold" }}>Order Summary</div>
+                  <div style={{ marginTop: 10 }}>You have 2 item(s)</div>
+                  <hr />
+                  <div
+                    style={{
+                      marginTop: 10,
+                      marginBottom: 20,
+                      flexDirection: "row",
+                    }}
+                  >
+                    <label style={{ fontWeight: "bold" }}>Grand total</label>
+                    <label style={{ marginLeft: 10 }}>970 Bath</label>
+                  </div>
+
+                  <div style={{ textAlign: "center" }}>
+                    <NavLink to="/Checkout">
+                      <button
+                        type="submit"
+                        style={{
+                          width: "80%",
+                          height: 50,
+                          borderColor: "white",
+                          backgroundColor: "#008374",
+                          color: "white",
+                          fontSize: 24,
+                          marginBottom: 10,
+                        }}
+                      >
+                        Continue
+                      </button>
+                    </NavLink>
+                  </div>
+
+                  <div style={{ textAlign: "center", marginBottom: 15 }}>
+                    <NavLink to="/Cart">Edit Cart</NavLink>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
